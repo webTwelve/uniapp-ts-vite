@@ -38,8 +38,18 @@
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
     "type-check": "vue-tsc --noEmit",
     "prettier": "prettier --write .",
-    "prepare": "husky install",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "preinstall": "node ./pre-commit.ts",
+    "postinstall": "husky install",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "pre-lint": "yarn run prettier & yarn run lint"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "npm run lint"
+    ]
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-alpha-3070720230316001",
@@ -77,6 +87,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.10.0",
     "husky": "^8.0.0",
+    "lint-staged": "^15.2.0",
     "prettier": "^2.8.6",
     "typescript": "^4.9.4",
     "vite": "4.0.4",
