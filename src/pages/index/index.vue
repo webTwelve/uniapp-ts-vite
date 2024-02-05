@@ -1,8 +1,9 @@
 <template>
   <view class="content">
     <image class="logo" src="/static/logo.png" />
-    <view class="text-area">
+    <view class="text-area" ref="aa">
       <text class="title">{{ title }}</text>
+      <button @click="fn">DD</button>
     </view>
   </view>
 </template>
@@ -10,6 +11,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 const title = ref('Hello')
+const aa = ref()
+const fn = () => {
+  console.log(aa.value)
+}
 </script>
 
 <style>
